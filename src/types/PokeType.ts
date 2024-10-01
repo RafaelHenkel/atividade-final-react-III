@@ -1,27 +1,27 @@
-interface PokeSimpleType {
+export interface PokeSimpleType {
   name: string;
   url: string;
 }
 
-interface AbilitiesType {
+export interface AbilitiesType {
   ability: { name: string };
 }
 
-interface SpritesType {
+export interface SpritesType {
   back_default: string;
   front_default: string;
 }
 
-interface StatsType {
+export interface StatsType {
   base_stat: number;
   stat: { name: string };
 }
 
-interface TypesType {
+export interface TypesType {
   types: { name: string };
 }
 
-interface PokeDefaultType {
+export interface PokeDefaultType {
   id: number;
   name: string;
   height: number;
