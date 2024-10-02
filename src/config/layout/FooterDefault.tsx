@@ -8,7 +8,7 @@ function FooterDefault() {
         sx={{
           backgroundColor: '#1976D2',
           width: '100%',
-          height: '4rem',
+          minHeight: '10vh',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
