@@ -6,11 +6,19 @@ import PokeCard from '../components/PokeCard';
 import { Paper } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useEffect } from 'react';
+import { getPokemon } from '../store/models/PokeSlice';
 
 export function Home() {
+  const dispatch = useAppDispatch();
+  const pokeSelector = useAppSelector(state => state.pokemons);
+
+  useEffect(() => {
+    dispatch(getPokemon());
+  }, []);
+
   function handleNext() {
     console.log('Next');
   }
@@ -34,9 +42,11 @@ export function Home() {
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
             </Paper>
           </Grid>
-          <Grid size={3}>
-            <PokeCard />
-          </Grid>
+          {pokeSelector.poke.map(poke => (
+            <Grid size={3}>
+              <PokeCard poke={poke} />
+            </Grid>
+          ))}
           <Grid size={12} display="flex" justifyContent="center">
             <IconButton onClick={handlePrev}>
               <ArrowBack fontSize="large" />

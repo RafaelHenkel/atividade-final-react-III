@@ -5,21 +5,21 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
+import { PokeDefaultType } from '../types/PokeType';
+import { CardMedia } from '@mui/material';
 
-export default function PokeCard() {
+interface PokeCardProps {
+  poke: PokeDefaultType;
+}
+export default function PokeCard({ poke }: PokeCardProps) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
-        {/* <CardMedia
-          component="img"
-          height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
-        /> */}
+        <CardMedia component="img" height="140" image={poke.sprites.front_default} alt="green iguana" />
         <div className="w-full h-60 bg-red-500" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            POKENAME
+            {poke.name}
           </Typography>
         </CardContent>
       </CardActionArea>
