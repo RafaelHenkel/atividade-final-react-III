@@ -1,8 +1,7 @@
 import React from 'react';
-import HeaderDefault from './header/HeaderDefault';
-import MainDefaultStyled from './MainDefaultStyled';
+import HeaderDefault from './HeaderDefault';
 import PageDefaultStyled from './PageDefaultStyled';
-import FooterDefault from './footer/FooterDefault';
+import FooterDefault from './FooterDefault';
 import { Container } from '@mui/material';
 
 interface PageDefaultProps {
@@ -14,9 +13,7 @@ function PageDefault({ children }: PageDefaultProps) {
     <>
       <PageDefaultStyled>
         <HeaderDefault />
-        <MainDefaultStyled>
-          <Container>{children}</Container>
-        </MainDefaultStyled>
+        <Container>{children}</Container>
         <FooterDefault />
       </PageDefaultStyled>
     </>
