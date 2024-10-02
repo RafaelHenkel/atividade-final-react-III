@@ -4,7 +4,13 @@ import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { Grid2 as Grid } from '@mui/material';
 import PokeCard from '../components/PokeCard';
 
-function Home() {
+export function Home() {
+  function handleNext() {
+    console.log('Next');
+  }
+  function handlePrev() {
+    console.log('Prev');
+  }
   return (
     <>
       <PageDefault>
@@ -13,10 +19,10 @@ function Home() {
             <PokeCard />
           </Grid>
           <Grid size={12} display="flex" justifyContent="center">
-            <IconButton>
+            <IconButton onClick={handlePrev}>
               <ArrowBack fontSize="large" />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handleNext}>
               <ArrowForward fontSize="large" />
             </IconButton>
           </Grid>
@@ -25,5 +31,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;
