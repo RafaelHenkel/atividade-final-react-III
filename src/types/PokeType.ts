@@ -1,6 +1,11 @@
-export interface PokeSimpleType {
-  name: string;
-  url: string;
+export interface PokeFirstReqType {
+  count: number;
+  next: string;
+  prev: string | null;
+  result: {
+    name: string;
+    url: string;
+  }[];
 }
 
 export interface AbilitiesType {
@@ -10,6 +15,8 @@ export interface AbilitiesType {
 export interface SpritesType {
   back_default: string;
   front_default: string;
+  front_shiny: string;
+  back_shiny: string;
 }
 
 export interface StatsType {
@@ -18,7 +25,7 @@ export interface StatsType {
 }
 
 export interface TypesType {
-  types: { name: string };
+  types: { name: string; base_stat: number };
 }
 
 export interface PokeDefaultType {
@@ -27,8 +34,8 @@ export interface PokeDefaultType {
   height: number;
   weight: number;
   base_experience: number;
-  abilities: AbilitiesType;
+  abilities: AbilitiesType[];
   sprites: SpritesType;
-  stats: StatsType;
+  stats: StatsType[];
   types: TypesType;
 }

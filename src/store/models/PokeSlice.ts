@@ -1,24 +1,25 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { doGet } from '../../services/api';
-import { PokeSimpleType } from '../../types/PokeType';
+import { PokeDefaultType, PokeFirstReqType } from '../../types/PokeType';
 
-const initialState: PokeSimpleType[] = [];
+const initialState: PokeDefaultType[] = [];
 
 export const getPokemon = createAsyncThunk('pokemon/getPokemon', async () => {
-  const response = await doGet('/pokemon');
+  const firstResponse: PokeFirstReqType = await doGet('/pokemon');
+  const response: PokeDefaultType[] = [];
 
-  if (response) {
-    return response;
+  for (const poke of firstResponse.result) {
+    const detailedPoke = await doGet(poke.url);
+    response.push(detailedPoke);
   }
-
-  return [];
+  return response;
 });
 
 const PokeSlice = createSlice({
   name: 'pokemons',
   initialState: { poke: initialState, loading: false },
   reducers: {
-    addProduct: (state, action: PayloadAction<PokeSimpleType>) => {
+    addProduct: (state, action: PayloadAction<PokeDefaultType>) => {
       state.poke.push({ ...action.payload });
       return state;
     },

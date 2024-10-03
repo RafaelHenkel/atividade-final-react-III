@@ -43,7 +43,7 @@ export function Home() {
             </Paper>
           </Grid>
           {pokeSelector.poke.map(poke => (
-            <Grid size={3}>
+            <Grid size={3} key={poke.id}>
               <PokeCard poke={poke} />
             </Grid>
           ))}

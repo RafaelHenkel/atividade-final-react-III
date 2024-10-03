@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     errorElement: <Error404 />,
   },
   {
-    path: '/poke',
+    path: '/:name',
     element: <PokePage />,
   },
 ]);
