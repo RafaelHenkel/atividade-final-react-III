@@ -16,6 +16,8 @@ export function Home() {
   const pokeSelector = useAppSelector(state => state.pokemons);
 
   useEffect(() => {
+    document.title = `PokeDev`;
+
     dispatch(getPokemon());
   }, []);
 
