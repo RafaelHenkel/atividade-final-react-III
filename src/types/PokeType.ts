@@ -2,7 +2,7 @@ export interface PokeFirstReqType {
   count: number;
   next: string;
   prev: string | null;
-  result: {
+  results: {
     name: string;
     url: string;
   }[];
@@ -24,8 +24,16 @@ export interface StatsType {
   stat: { name: string };
 }
 
+export interface TypeType {
+  slot: number;
+  type: { name: string };
+}
+
 export interface TypesType {
-  types: { name: string; base_stat: number };
+  slot: number;
+  type: {
+    name: string;
+  };
 }
 
 export interface PokeDefaultType {
@@ -37,5 +45,5 @@ export interface PokeDefaultType {
   abilities: AbilitiesType[];
   sprites: SpritesType;
   stats: StatsType[];
-  types: TypesType;
+  types: TypesType[];
 }

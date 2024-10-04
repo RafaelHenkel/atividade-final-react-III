@@ -4,23 +4,41 @@ import { PokeDefaultType, PokeFirstReqType } from '../../types/PokeType';
 
 const initialState: PokeDefaultType[] = [];
 
-export const getPokemon = createAsyncThunk('pokemon/getPokemon', async () => {
-  const firstResponse: PokeFirstReqType = await doGet('/pokemon');
+export const getPokemon = createAsyncThunk('pokemon/getPokemon', async (offset: number) => {
+  const firstResponse: PokeFirstReqType = await doGet(`/pokemon/?offset=${offset}&limit=20`);
   const response: PokeDefaultType[] = [];
 
-  for (const poke of firstResponse.result) {
-    const detailedPoke = await doGet(poke.url);
-    response.push(detailedPoke);
+  for (const poke of firstResponse.results) {
+    const getPoke = await doGet(`/pokemon/${poke.name}`);
+    response.push(getPoke);
   }
+
   return response;
 });
 
 const PokeSlice = createSlice({
   name: 'pokemons',
-  initialState: { poke: initialState, loading: false },
+  initialState: { poke: initialState, loading: false, offset: 0, likes: [] },
   reducers: {
-    addProduct: (state, action: PayloadAction<PokeDefaultType>) => {
+    addPoke: (state, action: PayloadAction<PokeDefaultType>) => {
       state.poke.push({ ...action.payload });
+      state.likes = [];
+      state.loading = false;
+      return state;
+    },
+    pokeOffset: (state, action: PayloadAction<number>) => {
+      state.offset = action.payload;
+      return state;
+    },
+    likedPoke: (state, action: PayloadAction<PokeDefaultType>) => {
+      const alreadyLiked = state.likes.find(id => id === action.payload.id);
+      if (alreadyLiked) {
+        state.likes = state.likes.filter(id => id !== action.payload.id);
+        state.loading = false;
+        return state;
+      }
+      state.loading = false;
+      state.likes.push(action.payload);
       return state;
     },
   },
@@ -42,5 +60,5 @@ const PokeSlice = createSlice({
   },
 });
 
-export const { addProduct } = PokeSlice.actions;
+export const { addPoke, pokeOffset, likedPoke } = PokeSlice.actions;
 export default PokeSlice.reducer;

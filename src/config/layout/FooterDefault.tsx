@@ -6,7 +6,7 @@ function FooterDefault() {
     <>
       <Box
         sx={{
-          backgroundColor: '#1976D2',
+          backgroundColor: '#D32F2F',
           width: '100%',
           minHeight: '10vh',
           display: 'flex',
