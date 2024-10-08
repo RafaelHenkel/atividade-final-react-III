@@ -77,7 +77,52 @@ export function PokePage() {
               </Grid>
               <Grid size={12} display="flex" justifyContent="center" alignItems="center">
                 <ul className="flex flex-col items-center justify-center">
-                  {poke?.types.map(item => <li key={item.type.name}> {item.type.name}</li>)}
+                  {poke?.types.map(item => (
+                    <li key={item.type.name} className="flex justify-center items-center gap-2">
+                      {item.type.name}
+                      <img
+                        src={
+                          item.type.name === 'flying'
+                            ? '/public/fly.png'
+                            : item.type.name === 'dark'
+                              ? '/public/dark.png'
+                              : item.type.name === 'dragon'
+                                ? '/public/dragon.png'
+                                : item.type.name === 'earth'
+                                  ? '/public/earth.png'
+                                  : item.type.name === 'fairy'
+                                    ? '/public/fairy.png'
+                                    : item.type.name === 'figther'
+                                      ? '/public/figther.png'
+                                      : item.type.name === 'fire'
+                                        ? '/public/fire.png'
+                                        : item.type.name === 'ghost'
+                                          ? '/public/ghost.png'
+                                          : item.type.name === 'grass'
+                                            ? '/public/grass.png'
+                                            : item.type.name === 'ice'
+                                              ? '/public/ice.png'
+                                              : item.type.name === 'normal'
+                                                ? '/public/normal.png'
+                                                : item.type.name === 'psyc'
+                                                  ? '/public/psyc.png'
+                                                  : item.type.name === 'rock'
+                                                    ? '/public/rock.png'
+                                                    : item.type.name === 'steel'
+                                                      ? '/public/steel.png'
+                                                      : item.type.name === 'thunder'
+                                                        ? '/public/thunder.png'
+                                                        : item.type.name === 'water'
+                                                          ? '/public/water.png'
+                                                          : item.type.name === 'ground'
+                                                            ? '/public/ground.png'
+                                                            : item.type.name === 'poison'
+                                                              ? '/public/poison.png'
+                                                              : undefined
+                        }
+                      />
+                    </li>
+                  ))}
                 </ul>
               </Grid>
               <Grid size={12} display="flex" justifyContent="center" alignItems="center">
