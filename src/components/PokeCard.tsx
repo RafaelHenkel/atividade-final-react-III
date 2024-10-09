@@ -8,16 +8,19 @@ import { PokeDefaultType } from '../types/PokeType';
 import { CardMedia } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { likedPoke } from '../store/models/PokeSlice';
+import { likedPoke } from '../store/models/PokeLikes';
 
 interface PokeCardProps {
   poke: PokeDefaultType;
 }
+
 export default function PokeCard({ poke }: PokeCardProps) {
   const dispach = useAppDispatch();
-  const selector = useAppSelector(state => state.pokemons);
+  const likeSelector = useAppSelector(state => state.likes);
 
   function handleLike() {
+    console.log(poke);
+
     dispach(likedPoke(poke));
   }
   return (
@@ -34,7 +37,9 @@ export default function PokeCard({ poke }: PokeCardProps) {
       </Link>
       <CardActions>
         <Button size="small" onClick={() => handleLike()} color="inherit">
-          {selector && selector.likes && selector.likes.find(item => item.id === poke.id) ? 'Descurtir' : 'Curtir'}
+          {likeSelector && likeSelector.poke && likeSelector.poke.find(item => item.id === poke.id)
+            ? 'Descurtir'
+            : 'Curtir'}
         </Button>
       </CardActions>
     </Card>

@@ -18,27 +18,15 @@ export const getPokemon = createAsyncThunk('pokemon/getPokemon', async (offset: 
 
 const PokeSlice = createSlice({
   name: 'pokemons',
-  initialState: { poke: initialState, loading: false, offset: 0, likes: [] },
+  initialState: { poke: initialState, loading: false, offset: 0 },
   reducers: {
     addPoke: (state, action: PayloadAction<PokeDefaultType>) => {
       state.poke.push({ ...action.payload });
-      state.likes = [];
       state.loading = false;
       return state;
     },
     pokeOffset: (state, action: PayloadAction<number>) => {
       state.offset = action.payload;
-      return state;
-    },
-    likedPoke: (state, action: PayloadAction<PokeDefaultType>) => {
-      const alreadyLiked = state.likes.find(id => id === action.payload.id);
-      if (alreadyLiked) {
-        state.likes = state.likes.filter(id => id !== action.payload.id);
-        state.loading = false;
-        return state;
-      }
-      state.loading = false;
-      state.likes.push(action.payload);
       return state;
     },
   },
@@ -60,5 +48,5 @@ const PokeSlice = createSlice({
   },
 });
 
-export const { addPoke, pokeOffset, likedPoke } = PokeSlice.actions;
+export const { addPoke, pokeOffset } = PokeSlice.actions;
 export default PokeSlice.reducer;

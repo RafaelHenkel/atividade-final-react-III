@@ -6,7 +6,6 @@ import { PokeDefaultType } from '../types/PokeType';
 import { getPokemon } from '../store/models/PokeSlice';
 import { Box, Button, CircularProgress, Grid2 as Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 export function PokePage() {
   const { name } = useParams();

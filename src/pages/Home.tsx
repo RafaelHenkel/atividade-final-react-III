@@ -6,8 +6,9 @@ import PokeCard from '../components/PokeCard';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getPokemon, pokeOffset } from '../store/models/PokeSlice';
+import { getSearchPokemon } from '../store/models/PokeSearch';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,6 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export function Home() {
+  const [search, setSearch] = useState<string>('');
   const dispatch = useAppDispatch();
   const pokeSelector = useAppSelector(state => state.pokemons);
 
@@ -91,7 +93,12 @@ export function Home() {
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
             </Search>
             <IconButton onClick={handleNext}>
               <ArrowForward fontSize="large" />
@@ -108,6 +115,14 @@ export function Home() {
               </Grid>
             ))
           )}
+          <Grid size={12} display="flex" justifyContent="center" alignItems="center">
+            <IconButton onClick={handlePrev}>
+              <ArrowBack fontSize="large" />
+            </IconButton>
+            <IconButton onClick={handleNext}>
+              <ArrowForward fontSize="large" />
+            </IconButton>
+          </Grid>
         </Grid>
       </PageDefault>
     </>

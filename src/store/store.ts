@@ -4,9 +4,10 @@ import storage from 'redux-persist/lib/storage';
 import rootReducer from './models/rootReducer';
 
 const persistConfig = {
-  key: `users-redux`,
+  key: `poke-redux`,
   version: 1,
   storage,
+  whitelist: ['likes'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
