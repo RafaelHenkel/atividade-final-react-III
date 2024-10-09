@@ -13,6 +13,9 @@ export interface AbilitiesType {
 }
 
 export interface SpritesType {
+  other: {
+    'official-artwork': { front_default: string };
+  };
   back_default: string;
   front_default: string;
   front_shiny: string;

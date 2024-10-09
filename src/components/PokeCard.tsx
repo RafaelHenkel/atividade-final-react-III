@@ -27,7 +27,12 @@ export default function PokeCard({ poke }: PokeCardProps) {
     <Card sx={{ maxWidth: 345 }}>
       <Link to={poke.name}>
         <CardActionArea>
-          <CardMedia component="img" height="140" image={poke.sprites.front_default} alt="green iguana" />
+          <CardMedia
+            component="img"
+            height="140"
+            image={poke.sprites.other['official-artwork'].front_default}
+            alt="green iguana"
+          />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {poke.name}
