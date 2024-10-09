@@ -56,12 +56,18 @@ export function Home() {
   const [search, setSearch] = useState<string>('');
   const dispatch = useAppDispatch();
   const pokeSelector = useAppSelector(state => state.pokemons);
+  const dispachSearch = useAppDispatch();
+  const pokeSearchSelector = useAppSelector(state => state.pokeSearch);
 
   useEffect(() => {
     document.title = `PokéDev`;
 
     dispatch(getPokemon(pokeSelector.offset));
   }, [dispatch, pokeSelector.offset]);
+
+  useEffect(() => {
+    dispachSearch(getSearchPokemon(search));
+  }, [search]);
 
   function handleNext() {
     dispatch(pokeOffset(pokeSelector.offset + 20));
@@ -104,7 +110,19 @@ export function Home() {
               <ArrowForward fontSize="large" />
             </IconButton>
           </Grid>
-          {pokeSelector.loading ? (
+          {search.length > 2 ? (
+            pokeSearchSelector.loading ? (
+              <Box width="100%" height="50%" display="flex" justifyContent="center">
+                <CircularProgress />
+              </Box>
+            ) : (
+              pokeSearchSelector.poke.map(poke => (
+                <Grid size={3} key={poke.id}>
+                  <PokeCard poke={poke} />
+                </Grid>
+              ))
+            )
+          ) : pokeSelector.loading ? (
             <Box width="100%" height="50%" display="flex" justifyContent="center">
               <CircularProgress />
             </Box>
@@ -115,6 +133,7 @@ export function Home() {
               </Grid>
             ))
           )}
+
           <Grid size={12} display="flex" justifyContent="center" alignItems="center">
             <IconButton onClick={handlePrev}>
               <ArrowBack fontSize="large" />
