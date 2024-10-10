@@ -9,6 +9,7 @@ import { CardMedia } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { likedPoke } from '../store/models/PokeLikesSlice';
+import { addPokemonPage } from '../store/models/PokePageSlice';
 
 interface PokeCardProps {
   poke: PokeDefaultType;
@@ -19,13 +20,16 @@ export default function PokeCard({ poke }: PokeCardProps) {
   const likeSelector = useAppSelector(state => state.likes);
 
   function handleLike() {
-    console.log(poke);
-
     dispach(likedPoke(poke));
   }
+
+  function handleSave() {
+    dispach(addPokemonPage(poke));
+  }
+
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <Link to={`/${poke.name}`}>
+      <Link to={`/${poke.name}`} onClick={handleSave}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -41,7 +45,11 @@ export default function PokeCard({ poke }: PokeCardProps) {
         </CardActionArea>
       </Link>
       <CardActions>
-        <Button size="small" onClick={() => handleLike()} color="inherit">
+        <Button
+          size="small"
+          onClick={() => handleLike()}
+          color={likeSelector.poke.find(item => item.id === poke.id) ? 'error' : 'inherit'}
+        >
           {likeSelector && likeSelector.poke && likeSelector.poke.find(item => item.id === poke.id)
             ? 'Descurtir'
             : 'Curtir'}
