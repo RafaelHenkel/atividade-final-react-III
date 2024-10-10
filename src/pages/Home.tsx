@@ -1,4 +1,4 @@
-import { alpha, Box, CircularProgress, IconButton, styled } from '@mui/material';
+import { alpha, Box, Button, CircularProgress, IconButton, styled } from '@mui/material';
 import PageDefault from '../config/layout/PageDefault';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { Grid2 as Grid } from '@mui/material';
@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { useEffect, useState } from 'react';
 import { getPokemon, pokeOffset } from '../store/models/PokeSlice';
 import { getSearchPokemon } from '../store/models/PokeSearchSlice';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -109,6 +110,13 @@ export function Home() {
             <IconButton onClick={handleNext}>
               <ArrowForward fontSize="large" />
             </IconButton>
+          </Grid>
+          <Grid size={12} display="flex" justifyContent="center" alignItems="center">
+            <Link to="/pokedex">
+              <Button variant="contained" size="small">
+                Pokedex
+              </Button>
+            </Link>
           </Grid>
           {search.length > 2 ? (
             pokeSearchSelector.loading ? (
