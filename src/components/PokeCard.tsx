@@ -8,7 +8,7 @@ import { PokeDefaultType } from '../types/PokeType';
 import { CardMedia } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { likedPoke } from '../store/models/PokeLikes';
+import { likedPoke } from '../store/models/PokeLikesSlice';
 
 interface PokeCardProps {
   poke: PokeDefaultType;
@@ -25,7 +25,7 @@ export default function PokeCard({ poke }: PokeCardProps) {
   }
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <Link to={poke.name}>
+      <Link to={`/${poke.name}`}>
         <CardActionArea>
           <CardMedia
             component="img"

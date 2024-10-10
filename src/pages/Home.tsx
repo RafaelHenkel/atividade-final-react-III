@@ -8,7 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { useEffect, useState } from 'react';
 import { getPokemon, pokeOffset } from '../store/models/PokeSlice';
-import { getSearchPokemon } from '../store/models/PokeSearch';
+import { getSearchPokemon } from '../store/models/PokeSearchSlice';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
