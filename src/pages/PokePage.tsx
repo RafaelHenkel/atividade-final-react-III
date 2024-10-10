@@ -1,33 +1,26 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PageDefault from '../config/layout/PageDefault';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { PokeDefaultType } from '../types/PokeType';
-import { getPokemon } from '../store/models/PokeSlice';
 import { Box, Button, CircularProgress, Grid2 as Grid, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { getPokemonPage } from '../store/models/PokePageSlice';
 
 export function PokePage() {
   const { name } = useParams();
-
-  const selector = useAppSelector(state => state.pokemons);
+  const selector = useAppSelector(state => state.pokePage);
   const dispatch = useAppDispatch();
-  const [poke, setPoke] = useState<PokeDefaultType>();
+  const navitage = useNavigate();
 
   useEffect(() => {
-    dispatch(getPokemon(selector.offset));
-  }, [selector.offset, dispatch]);
+    dispatch(getPokemonPage(name || ''));
+  }, [dispatch]);
 
   useEffect(() => {
     if (!name) {
       return;
     }
-    const pokeFind = selector.poke.find(item => item.name === name);
-
-    setPoke(pokeFind);
-
-    document.title = `PokéDev - ${poke?.name}`;
-  }, [name, poke, selector.poke]);
+    document.title = `PokéDev - ${name}`;
+  }, [name, selector]);
 
   return (
     <>
@@ -38,37 +31,35 @@ export function PokePage() {
           </Box>
         ) : (
           <Box>
-            <Link to="/">
-              <Button>Voltar</Button>
-            </Link>
+            <Button onClick={() => navitage(-1)}>Voltar</Button>
             <Grid container spacing={1}>
               <Grid size={6} display="flex" justifyContent="end" alignItems="center">
-                <img src={poke?.sprites.front_default} alt={poke?.name} />
+                <img src={selector?.poke.sprites.front_default} alt={selector?.poke.name} />
               </Grid>
               <Grid size={6} display="flex" justifyContent="start" alignItems="center">
-                <img src={poke?.sprites.back_default} alt={poke?.name} />
+                <img src={selector?.poke.sprites.back_default} alt={selector?.poke.name} />
               </Grid>
               <Grid size={6} display="flex" justifyContent="end" alignItems="center">
-                <img src={poke?.sprites.front_shiny} alt={poke?.name} />
+                <img src={selector?.poke.sprites.front_shiny} alt={selector?.poke.name} />
               </Grid>
               <Grid size={6} display="flex" justifyContent="start" alignItems="center">
-                <img src={poke?.sprites.back_shiny} alt={poke?.name} />
+                <img src={selector?.poke.sprites.back_shiny} alt={selector?.poke.name} />
               </Grid>
               <Grid size={12} display="flex" justifyContent="center" alignItems="center">
-                <Typography variant="h3">{poke?.name}</Typography>
+                <Typography variant="h3">{selector?.poke.name}</Typography>
               </Grid>
               <Grid size={12} display="flex" justifyContent="center" alignItems="center">
-                <Typography variant="subtitle1">ID: {poke?.id}</Typography>
+                <Typography variant="subtitle1">ID: {selector?.poke.id}</Typography>
               </Grid>
               <Grid size={12} display="flex" justifyContent="center" alignItems="center">
-                <Typography variant="subtitle1">Altura: {poke?.height} Metros</Typography>
+                <Typography variant="subtitle1">Altura: {selector?.poke.height} Metros</Typography>
               </Grid>
               <Grid size={12} display="flex" justifyContent="center" alignItems="center">
                 <Typography variant="subtitle1">Habilidades:</Typography>
               </Grid>
               <Grid size={12} display="flex" justifyContent="center" alignItems="center">
                 <ul className="flex flex-col items-center justify-center">
-                  {poke?.abilities.map(item => <li key={item.ability.name}>{item.ability.name}</li>)}
+                  {selector?.poke.abilities.map(item => <li key={item.ability.name}>{item.ability.name}</li>)}
                 </ul>
               </Grid>
               <Grid size={12} display="flex" justifyContent="center" alignItems="center">
@@ -76,7 +67,7 @@ export function PokePage() {
               </Grid>
               <Grid size={12} display="flex" justifyContent="center" alignItems="center">
                 <ul className="flex flex-col items-center justify-center">
-                  {poke?.types.map(item => (
+                  {selector?.poke.types.map(item => (
                     <li key={item.type.name} className="flex justify-center items-center gap-2">
                       {item.type.name}
                       <img
@@ -125,7 +116,7 @@ export function PokePage() {
                 </ul>
               </Grid>
               <Grid size={12} display="flex" justifyContent="center" alignItems="center">
-                {poke?.stats.map(item => (
+                {selector?.poke.stats.map(item => (
                   <div key={item.stat.name} className="flex flex-col w-full justify-center items-center">
                     <img
                       className="w-10 h-10"
