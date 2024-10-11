@@ -7,7 +7,7 @@ const persistConfig = {
   key: `poke-redux`,
   version: 1,
   storage,
-  whitelist: ['likes'],
+  whitelist: ['likes', 'pokePage'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

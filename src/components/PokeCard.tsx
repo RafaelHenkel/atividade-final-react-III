@@ -13,9 +13,10 @@ import { addPokemonPage } from '../store/models/PokePageSlice';
 
 interface PokeCardProps {
   poke: PokeDefaultType;
+  height?: string;
 }
 
-export default function PokeCard({ poke }: PokeCardProps) {
+export default function PokeCard({ poke, height }: PokeCardProps) {
   const dispach = useAppDispatch();
   const likeSelector = useAppSelector(state => state.likes);
 
@@ -30,15 +31,10 @@ export default function PokeCard({ poke }: PokeCardProps) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <Link to={`/${poke.name}`} onClick={handleSave}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image={poke.sprites.other['official-artwork'].front_default}
-            alt="green iguana"
-          />
+        <CardActionArea sx={{ height: height || '350px', maxHeight: height || '350px', width: '100%' }}>
+          <CardMedia component="img" image={poke.sprites.other['official-artwork'].front_default} alt={poke.name} />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant="h5">
               {poke.name}
             </Typography>
           </CardContent>
@@ -46,8 +42,10 @@ export default function PokeCard({ poke }: PokeCardProps) {
       </Link>
       <CardActions>
         <Button
+          sx={{ marginY: '6px' }}
           size="small"
           onClick={() => handleLike()}
+          variant="contained"
           color={likeSelector.poke.find(item => item.id === poke.id) ? 'error' : 'inherit'}
         >
           {likeSelector && likeSelector.poke && likeSelector.poke.find(item => item.id === poke.id)

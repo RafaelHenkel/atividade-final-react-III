@@ -1,11 +1,19 @@
-import { alpha, styled } from '@mui/material';
+import { alpha, Box, Button, CircularProgress, styled, Typography } from '@mui/material';
 import PageDefault from '../config/layout/PageDefault';
 import { Grid2 as Grid } from '@mui/material';
 import PokeCard from '../components/PokeCard';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
-import { useAppSelector } from '../store/hooks';
-import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useEffect, useState } from 'react';
+import { getSearchPokemon } from '../store/models/PokeSearchSlice';
+import { Link } from 'react-router-dom';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -51,32 +59,96 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export function Pokedex() {
   const [search, setSearch] = useState<string>('');
+  const [searchPokeAdd, setSearchPokeAdd] = useState<string>('');
   const selector = useAppSelector(state => state.likes);
+  const pokeSearchSelector = useAppSelector(state => state.pokeSearch);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getSearchPokemon(searchPokeAdd));
+  }, [searchPokeAdd]);
 
   return (
     <>
       <PageDefault>
-        <Grid container spacing={2} paddingY="15px">
+        <Grid container spacing={2} paddingY="15px" display="flex" alignItems="start">
           <Grid size={12} display="flex" justifyContent="center" alignItems="center">
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-              />
-            </Search>
+            <Link to="/">
+              <Button variant="contained" size="small">
+                Home
+              </Button>
+            </Link>
           </Grid>
-          {selector.poke
-            .filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
-            .map(poke => (
-              <Grid size={3} key={poke.id}>
-                <PokeCard poke={poke} />
-              </Grid>
-            ))}
+          <Grid container size={8} spacing={2} paddingY="15px">
+            <Grid size={12} display="flex" justifyContent="center" alignItems="center">
+              <Typography variant="h4">Pokedex</Typography>
+            </Grid>
+            <Grid size={12} display="flex" justifyContent="center" alignItems="center">
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Procurar…"
+                  inputProps={{ 'aria-label': 'search' }}
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                />
+              </Search>
+            </Grid>
+            {selector.poke
+              .filter(item => item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+              .map(poke => (
+                <Grid size={3} key={poke.id}>
+                  <PokeCard poke={poke} height="250px" />
+                </Grid>
+              ))}
+          </Grid>
+          <Grid container size={4} spacing={2} paddingY="15px" display="flex" alignItems="start">
+            <Grid size={12} display="flex" justifyContent="center" alignItems="center">
+              <Typography variant="h4">Adicionar Pokemons</Typography>
+            </Grid>
+            <Grid size={12} display="flex" justifyContent="center" alignItems="center">
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Procurar…"
+                  inputProps={{ 'aria-label': 'search' }}
+                  value={searchPokeAdd}
+                  onChange={e => setSearchPokeAdd(e.target.value)}
+                />
+              </Search>
+            </Grid>
+            <Grid size={12}>
+              {searchPokeAdd.length > 2 ? (
+                pokeSearchSelector.loading ? (
+                  <Box width="100%" height="50%" display="flex" justifyContent="center">
+                    <CircularProgress />
+                  </Box>
+                ) : (
+                  <Swiper
+                    // install Swiper modules
+                    modules={[Navigation, Pagination, Scrollbar, A11y]}
+                    spaceBetween={50}
+                    slidesPerView={1}
+                    pagination={{ clickable: true }}
+                    scrollbar={{ draggable: true }}
+                    style={{ paddingLeft: '1rem', paddingBottom: '1rem', height: '500px' }}
+                  >
+                    {pokeSearchSelector.poke.map(poke => (
+                      <SwiperSlide>
+                        <PokeCard poke={poke} height="400px" />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )
+              ) : (
+                ''
+              )}
+            </Grid>
+          </Grid>
         </Grid>
       </PageDefault>
     </>

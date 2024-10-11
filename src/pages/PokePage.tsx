@@ -30,10 +30,17 @@ export function PokePage() {
         <Box>
           <Grid container spacing={1}>
             <Grid size={12}>
-              <Button onClick={() => navitage(-1)}>Voltar</Button>
+              <Button variant="contained" size="small" onClick={() => navitage(-1)}>
+                Voltar
+              </Button>
             </Grid>
             <Grid size={12}>
-              <Button size="small" onClick={() => handleLike()} color={alreadyLiked ? 'error' : 'inherit'}>
+              <Button
+                size="small"
+                variant="contained"
+                onClick={() => handleLike()}
+                color={alreadyLiked ? 'error' : 'inherit'}
+              >
                 {likeSelector && likeSelector.poke && alreadyLiked ? 'Descurtir' : 'Curtir'}
               </Button>
             </Grid>
