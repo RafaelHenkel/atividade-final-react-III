@@ -4,6 +4,24 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { Box, Button, Grid2 as Grid, Typography } from '@mui/material';
 import { likedPoke } from '../store/models/PokeLikesSlice';
+import flyImage from './public/fly.png';
+import darkImage from './public/dark.png';
+import dragonImage from './public/dragon.png';
+import earthImage from './public/earth.png';
+import fairyImage from './public/fairy.png';
+import figtherImage from './public/figther.png';
+import fireImage from './public/fire.png';
+import ghostImage from './public/ghost.png';
+import grassImage from './public/grass.png';
+import iceImage from './public/ice.png';
+import normalImage from './public/normal.png';
+import psycImage from './public/psyc.png';
+import rockImage from './public/rock.png';
+import steelImage from './public/steel.png';
+import thunderImage from './public/thunder.png';
+import waterImage from './public/water.png';
+import groundImage from './public/ground.png';
+import poisonImage from './public/poison.png';
 
 export function PokePage() {
   const { name } = useParams();
@@ -84,41 +102,41 @@ export function PokePage() {
                     <img
                       src={
                         item.type.name === 'flying'
-                          ? './public/fly.png'
+                          ? flyImage
                           : item.type.name === 'dark'
-                            ? './public/dark.png'
+                            ? darkImage
                             : item.type.name === 'dragon'
-                              ? './public/dragon.png'
+                              ? dragonImage
                               : item.type.name === 'earth'
-                                ? './public/earth.png'
+                                ? earthImage
                                 : item.type.name === 'fairy'
-                                  ? './public/fairy.png'
+                                  ? fairyImage
                                   : item.type.name === 'figther'
-                                    ? './public/figther.png'
+                                    ? figtherImage
                                     : item.type.name === 'fire'
-                                      ? './public/fire.png'
+                                      ? fireImage
                                       : item.type.name === 'ghost'
-                                        ? './public/ghost.png'
+                                        ? ghostImage
                                         : item.type.name === 'grass'
-                                          ? './public/grass.png'
+                                          ? grassImage
                                           : item.type.name === 'ice'
-                                            ? './public/ice.png'
+                                            ? iceImage
                                             : item.type.name === 'normal'
-                                              ? './public/normal.png'
+                                              ? normalImage
                                               : item.type.name === 'psyc'
-                                                ? './public/psyc.png'
+                                                ? psycImage
                                                 : item.type.name === 'rock'
-                                                  ? './public/rock.png'
+                                                  ? rockImage
                                                   : item.type.name === 'steel'
-                                                    ? './public/steel.png'
+                                                    ? steelImage
                                                     : item.type.name === 'thunder'
-                                                      ? './public/thunder.png'
+                                                      ? thunderImage
                                                       : item.type.name === 'water'
-                                                        ? './public/water.png'
+                                                        ? waterImage
                                                         : item.type.name === 'ground'
-                                                          ? './public/ground.png'
+                                                          ? groundImage
                                                           : item.type.name === 'poison'
-                                                            ? './public/poison.png'
+                                                            ? poisonImage
                                                             : undefined
                       }
                     />
