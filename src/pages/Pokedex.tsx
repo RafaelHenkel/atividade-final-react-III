@@ -81,10 +81,12 @@ export function Pokedex() {
           </Grid>
           <Grid container size={8} spacing={2} paddingY="15px">
             <Grid size={12} display="flex" justifyContent="center" alignItems="center">
-              <Typography variant="h4">Pokedex</Typography>
+              <Typography variant="h4" className="text-white">
+                Pokedex
+              </Typography>
             </Grid>
             <Grid size={12} display="flex" justifyContent="center" alignItems="center">
-              <Search>
+              <Search sx={{ color: 'white !important', bgcolor: '#ffffff30 !important' }}>
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
@@ -106,10 +108,12 @@ export function Pokedex() {
           </Grid>
           <Grid container size={4} spacing={2} paddingY="15px" display="flex" alignItems="start">
             <Grid size={12} display="flex" justifyContent="center" alignItems="center">
-              <Typography variant="h4">Adicionar Pokemons</Typography>
+              <Typography variant="h4" className="text-white">
+                Adicionar Pokemons
+              </Typography>
             </Grid>
             <Grid size={12} display="flex" justifyContent="center" alignItems="center">
-              <Search>
+              <Search sx={{ color: 'white !important', bgcolor: '#ffffff30 !important' }}>
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
@@ -135,10 +139,14 @@ export function Pokedex() {
                     slidesPerView={1}
                     pagination={{ clickable: true }}
                     scrollbar={{ draggable: true }}
-                    style={{ paddingLeft: '1rem', paddingBottom: '1rem', height: '500px' }}
+                    style={{
+                      paddingLeft: '1rem',
+                      paddingBottom: '1rem',
+                      height: '500px',
+                    }}
                   >
                     {pokeSearchSelector.poke.map(poke => (
-                      <SwiperSlide>
+                      <SwiperSlide style={{ color: 'white' }}>
                         <PokeCard poke={poke} height="400px" />
                       </SwiperSlide>
                     ))}

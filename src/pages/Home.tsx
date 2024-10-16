@@ -93,9 +93,9 @@ export function Home() {
         <Grid container spacing={2} paddingY="15px">
           <Grid size={12} display="flex" justifyContent="center" alignItems="center">
             <IconButton onClick={handlePrev}>
-              <ArrowBack fontSize="large" />
+              <ArrowBack fontSize="large" sx={{ color: '#fff' }} />
             </IconButton>
-            <Search>
+            <Search sx={{ color: 'white !important', bgcolor: '#ffffff30 !important' }}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
@@ -107,7 +107,7 @@ export function Home() {
               />
             </Search>
             <IconButton onClick={handleNext}>
-              <ArrowForward fontSize="large" />
+              <ArrowForward fontSize="large" sx={{ color: '#fff' }} />
             </IconButton>
           </Grid>
           <Grid size={12} display="flex" justifyContent="center" alignItems="center">
@@ -143,10 +143,10 @@ export function Home() {
 
           <Grid size={12} display="flex" justifyContent="center" alignItems="center">
             <IconButton onClick={handlePrev}>
-              <ArrowBack fontSize="large" />
+              <ArrowBack fontSize="large" sx={{ color: '#fff' }} />
             </IconButton>
             <IconButton onClick={handleNext}>
-              <ArrowForward fontSize="large" />
+              <ArrowForward fontSize="large" sx={{ color: '#fff' }} />
             </IconButton>
           </Grid>
         </Grid>

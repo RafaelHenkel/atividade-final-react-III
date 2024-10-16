@@ -80,9 +80,14 @@ export default function PokeCard({ poke, height }: PokeCardProps) {
     >
       <Link to={`/${poke.name}`} onClick={handleSave}>
         <CardActionArea sx={{ height: height || '350px', maxHeight: height || '350px', width: '100%' }}>
-          <CardMedia component="img" image={poke.sprites.other['official-artwork'].front_default} alt={poke.name} />
+          <CardMedia
+            component="img"
+            sx={{ scale: 0.8, ':hover': { scale: 0.9 }, transition: 'scale 0.4s ease-in-out' }}
+            image={poke.sprites.other['official-artwork'].front_default}
+            alt={poke.name}
+          />
           <CardContent>
-            <Typography gutterBottom variant="h5">
+            <Typography gutterBottom variant="h5" fontWeight={600} sx={{ color: '#fff' }}>
               {poke.name}
             </Typography>
           </CardContent>
