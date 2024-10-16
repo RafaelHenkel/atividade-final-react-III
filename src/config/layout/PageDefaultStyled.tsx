@@ -5,8 +5,9 @@ const PageDefaultStyled = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
+  background-color: #060b28;
 `;
 
 export default PageDefaultStyled;

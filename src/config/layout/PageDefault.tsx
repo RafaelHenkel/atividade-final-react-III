@@ -13,7 +13,7 @@ function PageDefault({ children }: PageDefaultProps) {
     <>
       <PageDefaultStyled>
         <HeaderDefault />
-        <Container>{children}</Container>
+        <Container sx={{ minHeight: '76vh' }}>{children}</Container>
         <FooterDefault />
       </PageDefaultStyled>
     </>
