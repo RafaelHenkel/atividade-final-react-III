@@ -13,45 +13,6 @@ export function PokePage() {
   const likeSelector = useAppSelector(state => state.likes);
   const alreadyLiked = likeSelector.poke.find(item => item.id === selector.poke.id);
 
-  const pokeColor =
-    selector.poke.types[0].type.name === 'bug'
-      ? '#76a866'
-      : selector.poke.types[0].type.name === 'dark'
-        ? '#60596b'
-        : selector.poke.types[0].type.name === 'dragon'
-          ? '#7038f8'
-          : selector.poke.types[0].type.name === 'electric'
-            ? '#f9be00'
-            : selector.poke.types[0].type.name === 'fairy'
-              ? '#f469a9'
-              : selector.poke.types[0].type.name === 'fighting'
-                ? '#c03028'
-                : selector.poke.types[0].type.name === 'fire'
-                  ? '#f08030'
-                  : selector.poke.types[0].type.name === 'flying'
-                    ? '#768fd1'
-                    : selector.poke.types[0].type.name === 'ghost'
-                      ? '#735797'
-                      : selector.poke.types[0].type.name === 'grass'
-                        ? '#48d0b0'
-                        : selector.poke.types[0].type.name === 'ground'
-                          ? '#f2cd5a'
-                          : selector.poke.types[0].type.name === 'ice'
-                            ? '#77d2f7'
-                            : selector.poke.types[0].type.name === 'normal'
-                              ? '#5c5c5c'
-                              : selector.poke.types[0].type.name === 'poison'
-                                ? '#a040a0'
-                                : selector.poke.types[0].type.name === 'psychic'
-                                  ? '#f542bd'
-                                  : selector.poke.types[0].type.name === 'rock'
-                                    ? '#bcac66'
-                                    : selector.poke.types[0].type.name === 'steel'
-                                      ? '#b8b8d0'
-                                      : selector.poke.types[0].type.name === 'water'
-                                        ? '#457af7'
-                                        : '#ffff';
-
   useEffect(() => {
     if (!name) {
       return;
@@ -60,7 +21,7 @@ export function PokePage() {
   }, [name, selector]);
 
   function handleLike() {
-    dispach(selector?.poke.types);
+    dispach(likedPoke(selector.poke));
   }
 
   const getColorByType = (type: string) => {
@@ -105,8 +66,6 @@ export function PokePage() {
         return 'gray';
     }
   };
-
-  console.log(selector?.poke.abilities);
 
   return (
     <>
